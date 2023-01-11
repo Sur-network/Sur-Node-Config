@@ -1,0 +1,10 @@
+- name: setting up all servers
+  hosts: [explorer]
+  gather_facts: yes
+  roles:
+    # - docker
+    # - node
+    # - webserver
+    # - deployer
+    - ethereum-lite-explorer
+    

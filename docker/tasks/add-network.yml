@@ -1,0 +1,6 @@
+---
+#TODO: list iteration
+
+- name: Create a network
+  docker_network:
+    name: "{{ network_name }}"

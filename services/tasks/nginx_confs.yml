@@ -1,0 +1,37 @@
+---
+
+- name: copy admin nginx conf
+  become: yes
+  template:
+    src: admin.conf.j2
+    dest: "{{confs}}/amdin.conf"
+
+- name: copy analytics nginx conf
+  become: yes
+  template:
+    src: analytics.conf.j2
+    dest: "{{confs}}/analytics.conf"
+
+- name: copy api nginx conf
+  become: yes
+  template:
+    src: api.conf.j2
+    dest: "{{confs}}/api.conf"
+
+- name: copy builder nginx conf
+  become: yes
+  template:
+    src: builder.conf.j2
+    dest: "{{confs}}/builder.conf"
+
+- name: copy dashboard nginx conf
+  become: yes
+  template:
+    src: dashboard.conf.j2
+    dest: "{{confs}}/dashboard.conf"
+
+- name: copy landing nginx conf
+  become: yes
+  template:
+    src: landing.conf.j2
+    dest: "{{confs}}/landing.conf"

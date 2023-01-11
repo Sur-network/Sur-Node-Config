@@ -1,0 +1,23 @@
+---
+
+- name: Re-create nginx container
+  docker_container:
+    name: webserver
+    image: nginx:stable-alpine
+    state: started
+    restart_policy: always
+    restart: yes
+    recreate: yes
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes: 
+      - "/srv/barsaweb/nginx/vhost.d:/etc/nginx/vhost.d"
+      - "/srv/barsaweb/nginx/log:/var/log/nginx"
+      - "{{ builds }}:/builds"
+      - "{{ certs }}:/certs"
+      - "{{ confs }}:/etc/nginx/conf.d"  
+    networks:
+      - name: "{{docker_network}}"
+
+

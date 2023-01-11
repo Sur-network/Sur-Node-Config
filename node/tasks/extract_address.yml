@@ -1,0 +1,11 @@
+---
+# tasks file for extracting address of a node
+
+- name: extract key
+  become: yes
+  command: docker exec -ti sur besu --data-path=externalVolume/data public-key export-address --node-private-key-file=externalVolume/data/key 
+  register: result
+
+- name: Print stdout
+  debug:
+    var: result.stdout

@@ -1,0 +1,13 @@
+---
+# tasks file for making sure directories exist
+
+
+- name: making sure data and base directories exists
+  become: yes
+  file:
+    path: "{{ item.path }}"
+    state: directory 
+    mode: 0766
+    owner: '{{ansible_user}}'
+    group: '{{ansible_user}}'
+  with_items: "{{ directories }}"

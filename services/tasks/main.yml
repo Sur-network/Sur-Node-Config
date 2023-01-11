@@ -1,0 +1,10 @@
+---
+# tasks file for services
+
+- include: directories.yml
+
+# - include: ssl.yml
+
+- include: confs.yml
+
+- include: nginx.yml

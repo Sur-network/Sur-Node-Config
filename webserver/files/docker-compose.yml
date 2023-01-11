@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  webserver:
+    image: nginx:latest
+    restart: always
+    networks:
+      - "sur"
+    ports:
+      - "8545-8547:8545-8547"
+      - "30303:30303/tcp"
+      - "30303:30303/udp"
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /srv/nginx/conf/:/etc/nginx/conf.d/:ro
+      - /srv/nginx/logs/:/var/log/nginx:rw
+      - /srv/certbot/www:/var/www/certbot/:ro
+      - /srv/certbot/conf/:/etc/nginx/ssl/:ro
+  certbot:
+    image: certbot/certbot:latest
+    networks:
+      - "sur"
+    volumes:
+      - /srv/certbot/www:/var/www/certbot/:rw
+      - /srv/certbot/conf/:/etc/letsencrypt/:rw
+      - /srv/certbot/log/:/var/log/letsencrypt/:rw
+
+networks:
+  sur:
+    external: true

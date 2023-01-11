@@ -1,0 +1,11 @@
+---
+
+- name: Ensure python3-pip is installed
+  become: true
+  apt:
+    name: python3-pip
+    state: present
+
+- name: Pip3 install docker-py
+  become: true
+  command: pip3 install docker-py

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  webserver:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /srv/nginx/conf/:/etc/nginx/conf.d/:ro
+      - /srv/nginx/logs/:/var/log/nginx:rw
+      - /srv/certbot/www:/var/www/certbot/:ro
+      - /srv/certbot/conf/:/etc/nginx/ssl/:ro
+    networks:
+      - "sur"
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - /srv/certbot/www:/var/www/certbot/:rw
+      - /srv/certbot/conf/:/etc/letsencrypt/:rw 
+      - /srv/certbot/log/:/var/log/letsencrypt/:rw
+    networks:
+      - "sur"
+
+  ethereum-lite-explorer:
+    hostname: explorer
+    image: alethio/ethereum-lite-explorer
+    restart: always
+    environment:
+      APP_NODE_URL: "https://node.surnet.org:8545"
+    networks:
+      - "sur"
+
+
+networks:
+  sur:
+    external: true

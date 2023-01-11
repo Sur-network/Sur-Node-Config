@@ -1,0 +1,41 @@
+---
+# tasks file for node deployment
+
+- include: directories.yml
+
+
+- name: Capture files to delete
+  find:
+    paths: "{{srv}}/docker/data"
+    file_type: directory
+  register: found_files
+
+- name: Delete files
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ found_files['files'] }}"
+
+- name: Copy genesis file
+  become: yes
+  copy:
+    src: genesis.json
+    dest: "{{ srv }}/docker/genesis.json"
+    mode: 0766
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+
+
+- name: Copy genesis file
+  become: yes
+  copy:
+    src: toEncode.json
+    dest: "{{ srv }}/docker/toEncode.json"
+    mode: 0766
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+
+
+- include: create_container.yml
+
+- include: extract_address.yml
