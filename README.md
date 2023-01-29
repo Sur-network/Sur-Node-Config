@@ -17,7 +17,7 @@ After pulling the surblockchain/sur:latest image you can create a container with
 
 #### BESU_BOOTNODES:
 'enode://132f01b85efd10e213daa95a92446030dd6103f93c3e0b6ddf92bc082948b3b163e130947e1d3f3bb04fa2c4839002b277b4ce7f5f11be0a0ff3cee2fb52deea@node.surnet.org:30303'
-* This variable is a list of bootnodes seperated by ","
+* This variable is a list of bootnodes seperated by "git"
 
 #### BESU_P2P_HOST: 
 0.0.0.0

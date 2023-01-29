@@ -1,11 +1,16 @@
 ---
 
 
+
+- name: pull sur image
+  become: yes
+  shell: docker pull registry.surnet.org/sur:prod
+
 - name: Re-create sur container
   become: yes
   docker_container:
     name: sur
-    image: surblockchain/sur:latest
+    image: registry.surnet.org/sur:prod
     state: started
     restart_policy: always
     privileged: yes

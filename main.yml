@@ -1,10 +1,10 @@
 - name: setting up all servers
-  hosts: [explorer]
+  hosts: [zojaji]
   gather_facts: yes
   roles:
     # - docker
-    # - node
+    - node
     # - webserver
     # - deployer
-    - ethereum-lite-explorer
+    # - ethereum-lite-explorer
     
