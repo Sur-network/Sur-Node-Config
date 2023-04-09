@@ -32,7 +32,8 @@ The generate_extra_data.yml file contains tasks to generate extra data for the I
 ## 7. Configuring the firewall
 The firewall.yml file contains tasks to configure the firewall on the target machine. This file is included in the main playbook using the include module.
 
+
 To deploy a node using this playbook, run the following command:
     ansible-playbook -i inventory.ini main.yml --tags "setup,remove-data,restart,deploy,address,extradata,firewall"
-    
+
 This command will run the playbook with the specified tags, executing the tasks in the appropriate order.
