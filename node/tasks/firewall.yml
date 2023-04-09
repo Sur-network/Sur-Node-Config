@@ -1,0 +1,31 @@
+---
+- name: Install ufw package
+  become: yes
+  ansible.builtin.package:
+    name: ufw
+    state: present
+
+- name: Enable ufw
+  become: yes
+  ansible.builtin.systemd:
+    name: ufw
+    state: started
+    enabled: yes
+
+- name: Reset ufw rules to default
+  become: yes
+  ansible.builtin.ufw:
+    state: reset
+
+- name: Deny all incoming traffic
+  become: yes
+  ansible.builtin.ufw:
+    direction: incoming
+    policy: deny
+
+- name: Allow specific ports
+  become: yes
+  ansible.builtin.ufw:
+    rule: allow
+    port: "{{ item }}"
+  loop: "{{ allowed_ports }}"

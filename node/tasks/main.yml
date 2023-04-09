@@ -2,19 +2,21 @@
 # tasks file for node deployment
 
 - include: directories.yml
-
+  tags: setup
 
 - name: Capture files to delete
   find:
     paths: "{{srv}}/docker/data"
     file_type: directory
   register: found_files
+  tags: remove-data
 
 - name: Delete files
   file:
     path: "{{ item.path }}"
     state: absent
   with_items: "{{ found_files['files'] }}"
+  tags: remove-data
 
 - name: Copy genesis file
   become: yes
@@ -24,6 +26,8 @@
     mode: 0766
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
+  tags: setup
+
 
 - name: Copy toEncode file
   become: yes
@@ -33,7 +37,22 @@
     mode: 0766
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
+  tags: setup
+
 
 - include: create_container.yml
+  tags: restart, deploy
 
 - include: extract_address.yml
+  tags: address
+
+- include: extract_enode_address.yml
+  tags: address
+
+- include: generate_extra_data.yml
+  tags: extradata
+
+- include: firwall.yml
+  tags: firewall
+
+# besu rlp encode --from=toEncode.json --type=IBFT_EXTRA_DATA

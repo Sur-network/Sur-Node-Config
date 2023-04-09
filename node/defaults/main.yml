@@ -3,10 +3,11 @@
 
 # bootnodes: enode://5bc535bdc692a13adfc19aed96ead55b3a2c8bdd059546 9daed4427bd1e10052967855c68b8ebc70f6463d4fc59ece6530d1c400c8177732ad47cb6d2759413e@94.182.179.244:30303
 
-sur1: enode://132f01b85efd10e213daa95a92446030dd6103f93c3e0b6ddf92bc082948b3b163e130947e1d3f3bb04fa2c4839002b277b4ce7f5f11be0a0ff3cee2fb52deea@node.surnet.org:30303
+# sur1: enode://10131dcdb6c2f5adb578013bc85698c00ad54290fcfa0bbbf47880a846561947909a60d3869ddce7438e17f285208507637d3915ffafee2c0a5b64945fe2eb36@185.206.229.142:30303
 
+sur1: "enode://10131dcdb6c2f5adb578013bc85698c00ad54290fcfa0bbbf47880a846561947909a60d3869ddce7438e17f285208507637d3915ffafee2c0a5b64945fe2eb36@0.0.0.0:30303"
 
-bootnodes: "{{sur1}}"
+# bootnodes: "{{sur1}}"
 
 
 srv: "/srv"
@@ -19,4 +20,10 @@ directories:
 
 
 #Nodes:
-first_node: zojaji
+# first_node: zojaji
+
+allowed_ports:
+  - 22
+  - 80
+  - 443
+  - 30303

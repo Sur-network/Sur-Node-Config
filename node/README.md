@@ -1,38 +1,38 @@
-Role Name
-=========
 
-A brief description of the role goes here.
 
-Requirements
-------------
+### Ansible Playbook for Node Deployment in a Blockchain Network
+## This document describes an Ansible playbook for deploying a node in a blockchain network. The playbook covers the following tasks:
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Creating directories for the node.
+Removing any existing data.
+Copying genesis and toEncode files to the target machine.
+Creating Docker containers for the node.
+Extracting the node address and enode address.
+Generating extra data for the IBFT consensus mechanism.
+Configuring the firewall.
 
-Role Variables
---------------
+## 1. Creating directories for the node
+The directories.yml file should contain tasks to create necessary directories on the target machine. This file is included in the main playbook using the include module.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## 2. Removing any existing data
+The playbook finds and registers any existing directories in the specified path, and then deletes them. This ensures a clean environment for the new node deployment.
 
-Dependencies
-------------
+## 3. Copying genesis and toEncode files
+The genesis file and the toEncode file are copied from the local machine to the target machine. The copy module is used to set the correct permissions, owner, and group for these files.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## 4. Creating Docker containers for the node
+The create_container.yml file should contain tasks to create Docker containers for the node. This file is included in the main playbook using the include module.
 
-Example Playbook
-----------------
+## 5. Extracting the node address and enode address
+The extract_address.yml and extract_enode_address.yml files contain tasks to extract the node address and enode address, respectively. These files are included in the main playbook using the include module.
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+## 6. Generating extra data for the IBFT consensus mechanism
+The generate_extra_data.yml file contains tasks to generate extra data for the IBFT consensus mechanism. This file is included in the main playbook using the include module.
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+## 7. Configuring the firewall
+The firewall.yml file contains tasks to configure the firewall on the target machine. This file is included in the main playbook using the include module.
 
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+To deploy a node using this playbook, run the following command:
+    ansible-playbook -i inventory.ini main.yml --tags "setup,remove-data,restart,deploy,address,extradata,firewall"
+    
+This command will run the playbook with the specified tags, executing the tasks in the appropriate order.

@@ -1,0 +1,12 @@
+---
+# tasks file for extracting address of a node
+
+- name: extract key
+  become: yes
+  command: docker exec -ti sur rlp encode --from=externalVolume/toEncode.json --type=IBFT_EXTRA_DATA 
+  register: result
+
+- name: Print stdout
+  debug:
+    var: result.stdout
+

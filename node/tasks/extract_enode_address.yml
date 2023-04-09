@@ -1,0 +1,13 @@
+---
+# tasks file for extracting address of a node
+
+- name: extract key
+  become: yes
+  ignore_errors: yes
+  command: docker logs sur | grep enode
+  register: result
+
+- name: Print stdout
+  debug:
+    var: result.stdout
+
