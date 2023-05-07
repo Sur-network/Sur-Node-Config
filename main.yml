@@ -1,7 +1,7 @@
 - name: setting up all servers
-  hosts: [all]
+  hosts: [local]
   gather_facts: yes
   roles:
-    - docker
+    # - docker
     - node
     - webserver

@@ -18,7 +18,7 @@
       - "30303:30303/tcp"
       - "30303:30303/udp"
     env:
-      # BESU_BOOTNODES: "{{sur1}}"
+      BESU_BOOTNODES: "{{sur1}}"
       BESU_P2P_HOST: 0.0.0.0
       BESU_MINER_ENABLED: "true"
       BESU_MINER_COINBASE: "0x8a6ad97d00c13a5537c75a5076760f44619aec67"

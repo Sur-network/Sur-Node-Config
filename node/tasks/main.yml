@@ -4,7 +4,7 @@
 - include: directories.yml
   tags: setup
 
-- name: Capture files to delete
+- name: Capture files to delete  #TODO: Seperate this 
   find:
     paths: "{{srv}}/docker/data"
     file_type: directory
@@ -29,7 +29,7 @@
   tags: setup
 
 
-- name: Copy toEncode file
+- name: Copy toEncode file #TODO: Delete this
   become: yes
   copy:
     src: toEncode.json
@@ -52,7 +52,7 @@
 - include: generate_extra_data.yml
   tags: extradata
 
-- include: firwall.yml
+- include: firewall.yml
   tags: firewall
 
 # besu rlp encode --from=toEncode.json --type=IBFT_EXTRA_DATA
